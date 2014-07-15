@@ -11,11 +11,25 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-
+use Zend\Debug\Debug as ZendDebugger;
 class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
+        ZendDebugger::dump(getenv('APPLICATION_ENV'));
+    	$viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        return $viewModel;
+    }
+
+    public function albumAction() 
+    {
+    	$sm = $this->getServiceLocator();
+		$albumTable = $sm->get('AlbumTableGateway');
+
+    	$viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        $viewModel->albums = $albumTable->select();
+        return $viewModel;	
     }
 }

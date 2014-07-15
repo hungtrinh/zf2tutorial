@@ -11,6 +11,9 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Application\Model\AlbumTable;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 
 class Module
 {
@@ -36,4 +39,17 @@ class Module
             ),
         );
     }
+
+     // Add this method:
+     public function getServiceConfig()
+     {
+         return array(
+             'factories' => array(
+                 'AlbumTableGateway' => function ($sm) {
+                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                     return new TableGateway('album', $dbAdapter);
+                 },
+             ),
+         );
+     }
 }
