@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ZendSkeletonApplication
 =======================
 
@@ -75,3 +76,9 @@ project and you should be ready to go! It should look something like below:
             Allow from all
         </Directory>
     </VirtualHost>
+=======
+zf2tutorial
+===========
+
+zend framework tutorial
+>>>>>>> 248c7b7efd8a25593e81f7007e1f0bac0c46134d
