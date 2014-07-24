@@ -12,14 +12,15 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Debug\Debug as ZendDebugger;
+
 class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        ZendDebugger::dump(getenv('APPLICATION_ENV'));
-    	$viewModel = new ViewModel();
-        $viewModel->setTerminal(true);
-        return $viewModel;
+     //    ZendDebugger::dump(getenv('APPLICATION_ENV'));
+    	// $viewModel = new ViewModel();
+     //    $viewModel->setTerminal(true);
+     //    return $viewModel;
     }
 
     public function albumAction() 
@@ -31,5 +32,13 @@ class IndexController extends AbstractActionController
         $viewModel->setTerminal(true);
         $viewModel->albums = $albumTable->select();
         return $viewModel;	
+    }
+
+    public function sitemapAction()
+    {
+
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        return $viewModel;
     }
 }

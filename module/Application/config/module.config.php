@@ -15,7 +15,7 @@ return array(
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Album\Controller\Album',
+                        'controller' => 'Application\Controller\index',
                         'action'     => 'index',
                     ),
                 ),
@@ -50,6 +50,16 @@ return array(
                     ),
                 ),
             ),
+            'sitemap' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/sitemap.xml',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\index',
+                        'action'     => 'sitemap',
+                    ),
+                ),
+            )
         ),
     ),
     'service_manager' => array(
@@ -59,6 +69,9 @@ return array(
         ),
         'aliases' => array(
             'translator' => 'MvcTranslator',
+        ),
+        'factories' => array(
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
         ),
     ),
     'translator' => array(
@@ -86,7 +99,7 @@ return array(
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
-            'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            'error/index'             => __DIR__ . '/../view/error/index.phtml'
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
@@ -96,6 +109,53 @@ return array(
     'console' => array(
         'router' => array(
             'routes' => array(
+            ),
+        ),
+    ),
+    'navigation' => array(
+        'default' => array(
+            array('label' => 'Home', 'route' => 'home'),
+            array(
+                'label' => 'Album',
+                'route' => 'album',
+                'pages' => array(
+                    array(
+                        'label' => 'Add',
+                        'route' => 'album',
+                        'action' => 'add',
+                    ),
+                    array(
+                        'label' => 'Edit',
+                        'route' => 'album',
+                        'action' => 'edit',
+                    ),
+                    array(
+                        'label' => 'Delete',
+                        'route' => 'album',
+                        'action' => 'delete',
+                    ),
+                ),
+            ),
+            array(
+                'label' => 'Task',
+                'route' => 'todo',
+                'pages' => array(
+                    array(
+                        'label' => 'Add',
+                        'route' => 'todo',
+                        'action' => 'add',
+                    ),
+                    array(
+                        'label' => 'Edit',
+                        'route' => 'todo',
+                        'action' => 'edit',
+                    ),
+                    array(
+                        'label' => 'Delete',
+                        'route' => 'todo',
+                        'action' => 'delete',
+                    ),
+                ),
             ),
         ),
     ),

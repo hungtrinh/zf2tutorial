@@ -51,15 +51,26 @@
                     </a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
+                    <!--<ul class="nav navbar-nav">
                         <li class="active">
                             <a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a>
                         </li>
-                    </ul>
+                    </ul>-->
+                    <?php 
+                        echo $this->navigation('navigation')
+                                  ->menu()
+                                  ->setMinDepth(0)
+                                  ->setMaxDepth(0)
+                                  ->setUlClass('nav navbar-nav');
+                        ?>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
         <div class="container">
+            <?php echo $this->navigation('navigation')
+                            ->breadcrumbs()
+                            ->setMinDepth(0)
+                            ->setPartial(array('partial/breadcumb.phtml','Album'));?>
             <?php echo $this->content; ?>
             <hr>
             <footer>
