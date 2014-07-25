@@ -1,1 +1,3 @@
 <h1>Hello</h1>
+<?php echo preg_replace('/<script\b[^>]*>(.*?)<\/script>/ise',"htmlentities('$0')", "<script language='javascript'>alert('abc')</script>123");?>
+
