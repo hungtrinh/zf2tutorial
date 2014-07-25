@@ -1,5 +1,5 @@
 <?php
-namespace TodoTest;
+namespace TodoTest\Controller;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class TodoControllerTest extends AbstractHttpControllerTestCase
