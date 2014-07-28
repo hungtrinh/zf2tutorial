@@ -1,10 +1,10 @@
 <?php
 namespace Todo;
 
-// use Album\Model\Album;
-// use Album\Model\AlbumTable;
-// use Zend\Db\ResultSet\ResultSet;
-// use Zend\Db\TableGateway\TableGateway;
+use Todo\Model\Todo;
+use Todo\Model\TodoMapper;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 
 class Module {
 
@@ -27,21 +27,27 @@ class Module {
         );
     }
 
-    // public function getServiceConfig()
-    // {
-    //     return array(
-    //         'factories' => array(
-    //             'Album\Model\AlbumTable' => function ($sm) {
-    //                 $tableGateway = $sm->get('AlbumTableGateway');
-    //                 return new AlbumTable($tableGateway);
-    //             },
-    //             'AlbumTableGateway' => function ($sm) {
-    //                 $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-    //                 $resultSetPrototype = new ResultSet();
-    //                 $resultSetPrototype->setArrayObjectPrototype(new Album());
-    //                 return new TableGateway('album', $dbAdapter, null, $resultSetPrototype);
-    //             }
-    //         ),
-    //     );
-    // }
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'Todo\Model\TodoMapper' => function ($sm) {
+                    $todoTableGateway = $sm->get('TodoTableGateway');
+                    // var_dump($todoTableGateway);
+                    // die(__FILE__.__LINE__);
+                    return new TodoMapper($todoTableGateway);
+                },
+                'TodoTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Todo());
+                    return new TableGateway('todo',
+                        $dbAdapter,
+                        null,
+                        $resultSetPrototype
+                    );
+                }
+            ),
+        );
+    }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace TodoTest\Controller;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use Zend\Paginator\Paginator;
+use Zend\Paginator\Adapter\Null;
 
 class TodoControllerTest extends AbstractHttpControllerTestCase
 {
@@ -42,8 +44,22 @@ class TodoControllerTest extends AbstractHttpControllerTestCase
 
     public function testIndexActionCanBeAccessed()
     {
-        $this->dispatch('/todo');
+        $todoMapperMock = $this->getMock(
+            'Todo\Model\TodoMapper', 
+            array('findAll'), 
+            array(), 
+            '',
+            false
+        );
+        $todoMapperMock->expects($this->once())
+            ->method('findAll')
+            ->with(true)
+            ->will($this->returnValue(new Paginator(new Null(0))));
+        $sm = $this->getApplicationServiceLocator();
+        $sm->setAllowOverride(true);
+        $sm->setService('Todo\Model\TodoMapper', $todoMapperMock);
 
+        $this->dispatch('/todo');
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('Todo');
         $this->assertControllerName('Todo\Controller\Todo');

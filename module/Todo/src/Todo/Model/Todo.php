@@ -22,7 +22,7 @@ class Todo
      */
     protected $complete;
 
-    public function __construct($title,$id=0,$complete=0)
+    public function __construct($title='',$id=0,$complete=0)
     {
         $this->id = $id;
         $this->complete = $complete;
@@ -74,5 +74,12 @@ class Todo
         $this->complete = $complete;
 
         return $this;
+    }
+
+    public function exchangeArray(array $data = array())
+    {
+        $this->id = !empty($data['id']) ? $data['id'] : null;
+        $this->title = !empty($data['title']) ? $data['title'] : null;
+        $this->complete = !empty($data['complete']) ? $data['complete'] : null;
     }
 }

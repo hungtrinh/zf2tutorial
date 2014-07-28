@@ -32,4 +32,11 @@ class TodoTest extends PHPUnit_Framework_TestCase
         $todo = new Todo('sua ban ghe');
         $todo->setComplete(-1);
     }
+
+    public function testSetCompleteValid()
+    {
+        $todo = new Todo('sua ban ghe');
+        $todoReturn = $todo->setComplete(1);
+        $this->assertSame($todo, $todoReturn);
+    }
 }
